@@ -1,1 +1,0 @@
-protected idasset ? : number | null;
