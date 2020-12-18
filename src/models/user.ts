@@ -22,7 +22,7 @@ export default class User {
      */
 
     //constructeur
-    constructor(user: User | null, nom: string = '', prenom: string = '', email: string = '' password: string = '')
+    constructor(user: User | null, nom: string = '', prenom: string = '', email: string = '', password: string = '')
     {
         if (user == null) {
             this.nom = nom;
