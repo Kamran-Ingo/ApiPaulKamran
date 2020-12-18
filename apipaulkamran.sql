@@ -53,8 +53,8 @@ CREATE TABLE IF NOT EXISTS `apipaulkamran`.`group` (
   `Asset_Video_idVideo` INT NOT NULL,
   `User_iduser` INT NOT NULL,
   PRIMARY KEY (`idgroupe`),
-  INDEX `fk_groupe_Asset1_idx` (`Asset_idAsset` ASC, `Asset_Image_idImage` ASC, `Asset_Video_idVideo` ASC) VISIBLE,
-  INDEX `fk_groupe_User1_idx` (`User_iduser` ASC) VISIBLE,
+  INDEX `fk_groupe_Asset1_idx` (`Asset_idAsset` ASC, `Asset_Image_idImage` ASC, `Asset_Video_idVideo` ASC),
+  INDEX `fk_groupe_User1_idx` (`User_iduser` ASC),
   CONSTRAINT `fk_groupe_asset1`
     FOREIGN KEY (`Asset_idAsset`)
     REFERENCES `apipaulkamran`.`Asset` (`id_asset`)
@@ -107,8 +107,8 @@ CREATE TABLE IF NOT EXISTS `apipaulkamran`.`Conversation` (
   `id_conversation` INT NOT NULL,
   `User_receiver_id` INT NOT NULL,
   `User_sender_id` INT NOT NULL,
-  INDEX `fk_Conversation_User1_idx` (`User_receiver_id` ASC) VISIBLE,
-  INDEX `fk_Conversation_User2_idx` (`User_sender_id` ASC) VISIBLE,
+  INDEX `fk_Conversation_User1_idx` (`User_receiver_id` ASC),
+  INDEX `fk_Conversation_User2_idx` (`User_sender_id` ASC),
   PRIMARY KEY (`id_conversation`),
   CONSTRAINT `fk_Conversation_User1`
     FOREIGN KEY (`User_receiver_id`)
@@ -130,8 +130,8 @@ CREATE TABLE IF NOT EXISTS `apipaulkamran`.`Member` (
   `id_user` INT NOT NULL,
   `id_groupe` INT NOT NULL,
   PRIMARY KEY (`id_user`, `id_groupe`),
-  INDEX `fk_User_has_groupe_groupe1_idx` (`id_groupe` ASC) VISIBLE,
-  INDEX `fk_User_has_groupe_User1_idx` (`id_user` ASC) VISIBLE,
+  INDEX `fk_User_has_groupe_groupe1_idx` (`id_groupe` ASC),
+  INDEX `fk_User_has_groupe_User1_idx` (`id_user` ASC),
   CONSTRAINT `fk_User_has_groupe_User1`
     FOREIGN KEY (`id_user`)
     REFERENCES `apipaulkamran`.`User` (`iduser`)
@@ -153,11 +153,11 @@ CREATE TABLE IF NOT EXISTS `apipaulkamran`.`Message` (
   `content` TEXT NOT NULL,
   `create_time` DATETIME NOT NULL,
   `Conversation_id_Conversation` INT NOT NULL,
-  INDEX `fk_Message_Conversation1_idx` (`Conversation_id_Conversation` ASC) VISIBLE,
+  INDEX `fk_Message_Conversation1_idx` (`Conversation_id_Conversation` ASC),
   PRIMARY KEY (`id_message`),
   CONSTRAINT `idconversation`
-    FOREIGN KEY ()
-    REFERENCES `apipaulkamran`.`Conversation` ()
+    FOREIGN KEY (`conversation_id_conversation`)
+    REFERENCES `apipaulkamran`.`Conversation` (`id_conversation`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_Message_Conversation1`
