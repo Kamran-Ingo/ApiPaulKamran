@@ -62,10 +62,30 @@ export default class User {
      * @readonly
      * @type {array < string >}
      * @memberof User
-     
+     */
     get attributInsert(): Array < string >
     {
         return ['nom', 'prenom', 'email', 'password']
-    }*/
+    }
 
+    /***METHOd ***/
+
+    /**
+     * 
+     * Save to the property in database
+     * @returns {Promise < number >}
+     * @memberof User
+     */
+    save(): Promise < number > {
+        return new Promise((resolve, reject) => {
+            MySQL.insert(this.table, this).then((id: number) => {
+                this.iduser = id;
+                console.log(`Save ${this.table}`);
+                resolve(id)
+            }).catch((err) => {
+                console.log(err);
+                reject(false)
+            })
+        })
+    };
 }
